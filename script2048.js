@@ -19,10 +19,11 @@ function crearPieza(){
     const nums = [2,4,8];
     let num = Math.floor(Math.random() * 3); // esta funcion asigna un numero aleatorio entero entre 0 y 2 inclusivo
     let elemento = document.createElement("div");
-    elemento.textContent = nums[num].toString;
-    let ubicacion = document.querySelector(".cell");
+    elemento.textContent = nums[num];
+    let ubicacion = document.querySelector(".cell0");
     ubicacion.appendChild(elemento)
 
 }
 
+crearPieza();
 eventosTeclado();
