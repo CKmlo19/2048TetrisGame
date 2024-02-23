@@ -13,7 +13,7 @@ const pieza = {
 
 
 var gameBoard = [ [0,0,0,0],
-                  [0,2,0,0],
+                  [0,2,0,2],
                   [0,0,0,0],
                   [0,0,0,0],
                   [0,0,0,0]];
@@ -67,10 +67,11 @@ function eventosTeclado(){
                 if(gameBoard[pieza.positionx][pieza.positiony + 1] == pieza.num || 
                     gameBoard[pieza.positionx][pieza.positiony + 1] == 0) // verifica que sea el mismo numero o que este vacia
                     {
-                        gameBoard[pieza.positionx][pieza.positiony + 1] = gameBoard[pieza.positionx][pieza.positiony] + pieza.num;
+                        gameBoard[pieza.positionx][pieza.positiony + 1] += pieza.num;
                         gameBoard[pieza.positionx][pieza.positiony] = 0;
 
                         pieza.positiony++;
+                        pieza.num = gameBoard[pieza.positionx][pieza.positiony]
                         console.log(gameBoard);
                     }
             }
@@ -80,9 +81,11 @@ function eventosTeclado(){
                 if(gameBoard[pieza.positionx][pieza.positiony - 1] == pieza.num || 
                     gameBoard[pieza.positionx][pieza.positiony - 1] == 0) // verifica que sea el mismo numero o que este vacia
                     {
-                        gameBoard[pieza.positionx][pieza.positiony - 1] = gameBoard[pieza.positionx][pieza.positiony] + pieza.num;
+                        gameBoard[pieza.positionx][pieza.positiony - 1] += pieza.num;
                         gameBoard[pieza.positionx][pieza.positiony] = 0;
                         pieza.positiony--;
+                        pieza.num = gameBoard[pieza.positionx][pieza.positiony]
+
                         console.log(gameBoard);
                     }
 
