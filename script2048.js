@@ -4,7 +4,7 @@
 // 0 = vacio, otro numero es el numero dentro de dicha celda
 
 const pieza = {
-    num: 0,
+    num: 2,
     positionx: 1,
     positiony: 1
 
@@ -62,23 +62,40 @@ function generateRandomNumber() {
 
 function eventosTeclado(){
     document.addEventListener('keypress', (evt) => {
-
         if(evt.key === 'd'){
-            if(pieza.positiony + 1 < gameBoard[0].length); // verificar que no se salga
-            console.log(pieza.positiony);
-            console.log(gameBoard[0].length);
-                gameBoard[pieza.positionx][pieza.positiony + 1] = gameBoard[pieza.positionx][pieza.positiony];
-                gameBoard[pieza.positionx][pieza.positiony] = 0;
-                pieza.positiony++;
+            if(pieza.positiony + 1 < gameBoard[0].length){ // verificar que no se salga
+                if(gameBoard[pieza.positionx][pieza.positiony + 1] == pieza.num || 
+                    gameBoard[pieza.positionx][pieza.positiony + 1] == 0) // verifica que sea el mismo numero o que este vacia
+                    {
+                        gameBoard[pieza.positionx][pieza.positiony + 1] = gameBoard[pieza.positionx][pieza.positiony] + pieza.num;
+                        gameBoard[pieza.positionx][pieza.positiony] = 0;
+
+                        pieza.positiony++;
+                        console.log(gameBoard);
+                    }
+            }
         }
         if(evt.key === 'a'){
-            if(pieza.positiony - 1 >= 0); // verificar que no se salga
-                gameBoard[pieza.positionx][pieza.positiony - 1] = gameBoard[pieza.positionx][pieza.positiony];
-                gameBoard[pieza.positionx][pieza.positiony] = 0;
-                pieza.positiony--;
+            if(pieza.positiony - 1 >= 0){ // verificar que no se salga
+                if(gameBoard[pieza.positionx][pieza.positiony - 1] == pieza.num || 
+                    gameBoard[pieza.positionx][pieza.positiony - 1] == 0) // verifica que sea el mismo numero o que este vacia
+                    {
+                        gameBoard[pieza.positionx][pieza.positiony - 1] = gameBoard[pieza.positionx][pieza.positiony] + pieza.num;
+                        gameBoard[pieza.positionx][pieza.positiony] = 0;
+                        pieza.positiony--;
+                        console.log(gameBoard);
+                    }
+
+            }
         }
     });
 };
+
+// Esta funcion verifica las colisiones de la pieza con un numero
+function verificarColisiones(){
+
+
+}
 
 function calcularIndice(i,j){
     let indice = (i*gameBoard[0].length) + j;
@@ -110,11 +127,12 @@ function crearPieza(valor, fila, col){
 // game loop
 
 function game(){
+    eventosTeclado(); // lo primero es asignarle un eventListener al teclado
     // dibujar();
     //crearPieza(2, 2,2);
     setInterval(() => {
         //dibujar();
-        console.log(gameBoard);
+      //  console.log(gameBoard);
     }, 1000);
 
 }
@@ -129,25 +147,6 @@ function dibujar(){
     }
 }
 
-document.addEventListener('keypress', (evt) => {
-
-    if(evt.key === 'd'){
-        if(pieza.positiony + 1 < gameBoard[0].length){ // verificar que no se salga
-        console.log(pieza.positiony);
-        console.log(gameBoard[0].length);
-            gameBoard[pieza.positionx][pieza.positiony + 1] = gameBoard[pieza.positionx][pieza.positiony];
-            gameBoard[pieza.positionx][pieza.positiony] = 0;
-            pieza.positiony++;
-        }
-    }
-    if(evt.key === 'a'){
-        if(pieza.positiony - 1 >= 0){ // verificar que no se salga
-            gameBoard[pieza.positionx][pieza.positiony - 1] = gameBoard[pieza.positionx][pieza.positiony];
-            gameBoard[pieza.positionx][pieza.positiony] = 0;
-            pieza.positiony--;
-        }
-    }
-});
 
 function pausarIntervalo(id){
 
