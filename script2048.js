@@ -4,17 +4,22 @@
 // 0 = vacio, otro numero es el numero dentro de dicha celda
 
 const pieza = {
+    num: 0,
     positionx: 1,
     positiony: 1
 
 }
+
+
+
 var gameBoard = [ [0,0,0,0],
+                  [0,2,0,0],
                   [0,0,0,0],
                   [0,0,0,0],
-                  [0,0,0,0],
-                  [0,0,0,0]]
+                  [0,0,0,0]];
 
-
+var elet = document.getElementById("arreglo");
+elet.textContent = gameBoard;
 
 // Intento de función para mover el bloque (solo caida)
 function dropBlock() {
@@ -41,9 +46,12 @@ function generateRandomNumber() {
     let randomNumber = Math.floor(Math.random() * 100);
     if (randomNumber < 70) {
         console.log("Número generado: 2");
+        pieza.num = 2;
     }else if (randomNumber < 90) {
         console.log("Número generado: 4");
+        pieza.num = 4;
     } else if (randomNumber <= 100) {
+        pieza.num = 8;
         console.log("Número generado: 8");
     }else{
         console.log("Error al crear el número aleatorio");
@@ -54,18 +62,17 @@ function generateRandomNumber() {
 
 function eventosTeclado(){
     document.addEventListener('keypress', (evt) => {
-        console.log("Se ha presionado una tecla");
-        console.log(evt.key);
-        if(evt.key === 'd'){
-            console.log("Entra?");
 
-            if(gameBoard[pieza.positionx][pieza.positiony + 1] < gameBoard[0].length); // verificar que no se salga
+        if(evt.key === 'd'){
+            if(pieza.positiony + 1 < gameBoard[0].length); // verificar que no se salga
+            console.log(pieza.positiony);
+            console.log(gameBoard[0].length);
                 gameBoard[pieza.positionx][pieza.positiony + 1] = gameBoard[pieza.positionx][pieza.positiony];
                 gameBoard[pieza.positionx][pieza.positiony] = 0;
                 pieza.positiony++;
         }
         if(evt.key === 'a'){
-            if(gameBoard[pieza.positionx][pieza.positiony - 1] > 0); // verificar que no se salga
+            if(pieza.positiony - 1 >= 0); // verificar que no se salga
                 gameBoard[pieza.positionx][pieza.positiony - 1] = gameBoard[pieza.positionx][pieza.positiony];
                 gameBoard[pieza.positionx][pieza.positiony] = 0;
                 pieza.positiony--;
@@ -105,11 +112,9 @@ function crearPieza(valor, fila, col){
 function game(){
     // dibujar();
     //crearPieza(2, 2,2);
-    console.log(gameBoard);
     setInterval(() => {
         //dibujar();
         console.log(gameBoard);
-        eventosTeclado();
     }, 1000);
 
 }
@@ -123,6 +128,26 @@ function dibujar(){
         }
     }
 }
+
+document.addEventListener('keypress', (evt) => {
+
+    if(evt.key === 'd'){
+        if(pieza.positiony + 1 < gameBoard[0].length){ // verificar que no se salga
+        console.log(pieza.positiony);
+        console.log(gameBoard[0].length);
+            gameBoard[pieza.positionx][pieza.positiony + 1] = gameBoard[pieza.positionx][pieza.positiony];
+            gameBoard[pieza.positionx][pieza.positiony] = 0;
+            pieza.positiony++;
+        }
+    }
+    if(evt.key === 'a'){
+        if(pieza.positiony - 1 >= 0){ // verificar que no se salga
+            gameBoard[pieza.positionx][pieza.positiony - 1] = gameBoard[pieza.positionx][pieza.positiony];
+            gameBoard[pieza.positionx][pieza.positiony] = 0;
+            pieza.positiony--;
+        }
+    }
+});
 
 function pausarIntervalo(id){
 
