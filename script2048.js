@@ -12,8 +12,7 @@ const pieza = {
     num: 2,
     positionx: 0,
     positiony: Math.floor(Math.random() * 4)
-
-}
+};
 
 var gameBoard = [ [0,0,0,0],
                   [0,0,0,0],
@@ -44,7 +43,7 @@ function actualizarCronometro() {
 
     // Actualiza el contenido del elemento HTML con el cronómetro
     document.getElementById('scoreTime').textContent = `${minutos}m ${segundos}s`;
-}
+};
 
 // Función para incrementar el contador de movimientos
 function incrementarMovimientos() {
@@ -140,7 +139,7 @@ function eventosTeclado(){
             updateGUI();
         }
 });
-}
+};
 
 // Función para mostrar la ventana modal
 function openModalGanador() {
@@ -164,13 +163,13 @@ function openModalGanador() {
 
     const modal = document.getElementById('modal');
     modal.style.display = 'block';
-}
+};
 
 // Función para cerrar la ventana modal
 function closeModalGanador() {
     const modal = document.getElementById('modal');
     modal.style.display = 'none';
-}
+};
 
 function openModalPerdedor() {
     const finTiempo = new Date(); // Guarda el momento de finalización del juego
@@ -193,13 +192,13 @@ function openModalPerdedor() {
 
     const modal2 = document.getElementById('modal2');
     modal2.style.display = 'block';
-}
+};
 
 // Función para cerrar la ventana modal
 function closeModalPerdedor() {
     const modal2 = document.getElementById('modal2');
     modal2.style.display = 'none';
-}
+};
 
 
 // game loop
@@ -220,8 +219,7 @@ function game(){
         verificarGanador(intervalo);
 
     }, 1000);
-
-}
+};
 
 function buttomRestart1(){
     closeModalGanador();
@@ -237,7 +235,7 @@ function buttomRestart1(){
     document.getElementById('scoreMoves').textContent = movesCounter;
     piecesCounter = 0;
     document.getElementById('scorePieces').textContent = piecesCounter;
-}
+};
 
 function buttomRestart2(){
     closeModalPerdedor();
@@ -253,7 +251,7 @@ function buttomRestart2(){
     document.getElementById('scoreMoves').textContent = movesCounter;
     piecesCounter = 0;
     document.getElementById('scorePieces').textContent = piecesCounter;
-}
+};
 
 
 // Esta funcion hace que la pieza caiga automaticamente de manera vertical
@@ -285,12 +283,13 @@ function caerAutomaticamente(intervalo){
         }
     }
     updateGUI();
-}
+    //verificarBajar()
+};
 
 // Esta funcion esta para saber cuando la pieza no se puede mover mas hacia abajo
 function terminarPieza(){
 
-}
+};
 
 // esta funcion crea una nueva pieza
 function crearNewPieza(){
@@ -299,7 +298,7 @@ function crearNewPieza(){
     pieza.positionx = 0;
     pieza.positiony = Math.floor(Math.random() * 4);;
     gameBoard[pieza.positionx][pieza.positiony] = pieza.num;
-}
+};
 
 function verificarGanador(intervalo){
     for(let i = 0; i < gameBoard.length; i++){
@@ -311,11 +310,11 @@ function verificarGanador(intervalo){
             }
         }
     }
-}
+};
 
 function pausarIntervalo(id){
 
-}
+};
 
 function updateGUI(){
     countPieces();
@@ -324,7 +323,7 @@ function updateGUI(){
             const cellId = `celda_${row}_${col}`;
             const cellElement = document.getElementById(cellId);
 
-            // Actualiza la clase de la celda segÃºn el valor en la matriz de juego
+            // Actualiza la clase de la celda segun el valor en la matriz de juego
             if (gameBoard[row][col] === 0) {
                 if (row === 0){
                     cellElement.className = 'firstCell';
@@ -371,6 +370,21 @@ function updateGUI(){
             }
         }
     }
+};
+
+// Funcion que recorre toda la matriz y verifica si hay algun bloque que tenga que bajar
+function verificarBajar(){
+    for(let i = gameBoard.length - 1; i >= 0; i--){
+        for(let j = 0; j < gameBoard[0].length; j++){
+            if(gameBoard[i][j] !== 0){
+                if(i + 1 < gameBoard.length){
+                    if(gameBoard[i + 1][j] === 0){
+                        gameBoard[i + 1][j] = gameBoard[i][j];
+                        gameBoard[i][j] = 0;
+                        updateGUI();
+                    }
+                }
+            }
+        }
+    }
 }
-
-
