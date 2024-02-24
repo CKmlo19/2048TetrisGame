@@ -13,7 +13,7 @@ const pieza = {
 
 
 var gameBoard = [ [0,0,0,0],
-                  [0,2,0,4],
+                  [0,2,0,0],
                   [0,0,0,0],
                   [0,0,0,0],
                   [0,0,0,0]];
@@ -69,7 +69,6 @@ function eventosTeclado(){
                     {
                         gameBoard[pieza.positionx][pieza.positiony + 1] += pieza.num;
                         gameBoard[pieza.positionx][pieza.positiony] = 0;
-
                         pieza.positiony++;
                         pieza.num = gameBoard[pieza.positionx][pieza.positiony]
                         console.log(gameBoard);
@@ -135,40 +134,45 @@ function game(){
     //crearPieza(2, 2,2);
     console.log(gameBoard);
 
-    setInterval(() => {
+    const intervalo = setInterval(() => {
         //dibujar();
-        caerAutomaticamente();
         console.log(gameBoard);
+        caerAutomaticamente(intervalo);
+        verificarGanador(intervalo);
 
-    }, 5000);
+    }, 1000);
 
 }
 
-function dibujar(){
-    for(let i = 0; i < gameBoard.length; i++){
-        for(let j = 0; j < gameBoard[0].length; j++){
-            if(gameBoard[i][j] != 0){
-
-                        }
-        }
-    }
-}
 
 // Esta funcion hace que la pieza caiga automaticamente de manera vertical
-function caerAutomaticamente(){
-    if(pieza.positionx + 1 >= gameBoard.length){
-        pieza.num = 4
-        pieza.positionx = 0;
-        pieza.positiony = Math.floor(Math.random * 3);
-        gameBoard[pieza.positionx][pieza.positiony] = pieza.num;
+function caerAutomaticamente(intervalo){
 
+    if(pieza.positionx + 1 >= gameBoard.length){
+        crearNewPieza();
     }
-    else if(gameBoard[pieza.positionx + 1][pieza.positiony] != 0 || 
-        gameBoard[pieza.positionx + 1][pieza.positiony] != pieza.num){
+    else if(gameBoard[pieza.positionx + 1][pieza.positiony] == 0 || 
+        gameBoard[pieza.positionx + 1][pieza.positiony] == pieza.num)
+        {
+        pieza.num += gameBoard[pieza.positionx + 1][pieza.positiony];
         gameBoard[pieza.positionx + 1][pieza.positiony] = pieza.num;
         gameBoard[pieza.positionx][pieza.positiony] = 0;
         pieza.positionx++;
     }
+    // si abajo no es 0 y la pieza no es la misma suceden dos cosas
+    else if(gameBoard[pieza.positionx + 1][pieza.positiony] != 0 && gameBoard[pieza.positionx + 1][pieza.positiony] != pieza.num){
+        // si es en el puro inicio, el jugador pierde
+        if(pieza.positionx == 0){
+            console.log("Haz perdido");
+            clearInterval(intervalo);
+        }
+        // sino crea otra pieza
+        else{ 
+            crearNewPieza();
+        }
+    }
+
+    
 
 }
 // Esta funcion esta para saber cuando la pieza no se puede mover mas hacia abajo
@@ -176,15 +180,24 @@ function terminarPieza(){
 
 }
 
-function verificarGanador(){
+// esta funcion crea una nueva pieza
+function crearNewPieza(){
+    generateRandomNumber();
+    pieza.positionx = 0;
+    pieza.positiony = Math.floor(Math.random() * 4);;
+    gameBoard[pieza.positionx][pieza.positiony] = pieza.num;
+}
+
+function verificarGanador(intervalo){
     for(let i = 0; i < gameBoard.length; i++){
         for(let j = 0; j < gameBoard[0].length; j++){
-            if(gameBoard[i][j] >= 2048){ // Si llego al 2048
-                return true;
+            if(gameBoard[i][j] >= 128){ // Si llego al 2048
+                console.log("Haz ganado");
+                clearInterval(intervalo);
+                break;
             }
         }
     }
-    return false;
 
 }
 
