@@ -10,24 +10,20 @@
     <div class="container">
         <div class="divY"></div>
         <div class="header1">
-
-            <!--<h2 id="arreglo"></h2>-->
-
             <div class="titleGameDiv">
                 <div class="TitleText">2048 GAME</div>
             </div>
         </div>
         <div class="header">
             <div></div>
-            <h2>Moves: <span id="scoreMoves">0</span></h2>
-            <h2>Time: <span id="scoreTime">0</span></h1>
-            <h2>Pieces: <span id="scorePieces">0</span></h2>
+                <div class="Buttom" onclick="ClickActive('play')"><p>PLAY</p></div>
             <div></div>
         </div>
         <div class="spaceToButtoms">
             <div></div>
-            <div class="Buttom" onclick="ClickActive('play')"><p>Play</p></div>
-            <div class="Buttom" onclick="ClickActive('pause')"><p>Pause</p></div>
+                <h2>Moves: <span id="scoreMoves">0</span></h2>
+                <h2>Time: <span id="scoreTime">0</span></h1>
+                <h2>Pieces: <span id="scorePieces">0</span></h2>    
             <div></div>
         </div>
         <div class="table">
@@ -66,25 +62,27 @@
     </div>
     <div id="modal" class="modal">
         <div class="modal-content">
-            <span class="close" >&times;</span>
+            <span class="close" onclick="buttomRestart1()">&times;</span>
+
             <p id="Felicitacion">¡Felicidades! Has ganado.</p>
             <p id="F-Movimientos">Movimientos: 0</p>
             <p id="F-Tiempo">Tiempo: 0</p>
             <p id="F-Piezas">Piezas: 0</p>
 
-            <div class="buttomR" onclick="buttomRestart()">Restart</div>
+            <div class="buttomR" onclick="buttomRestart1()">Restart</div>
         </div>
     </div>
 
     <div id="modal2" class="modal">
         <div class="modal-content">
-            <span class="close" >&times;</span>
+            <span class="close" onclick="buttomRestart2()">&times;</span>
+
             <p id="Felicitacion">¡Has Perdido!</p>
             <p id="F-Movimientos">Movimientos: 0</p>
             <p id="F-Tiempo">Tiempo: 0</p>
             <p id="F-Piezas">Piezas: 0</p>
 
-            <div class="buttomR" onclick="buttomRestart()">Restart</div>
+            <div class="buttomR" onclick="buttomRestart2()">Restart</div>
         </div>
     </div>
 

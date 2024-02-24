@@ -7,12 +7,12 @@
 
 .header{
     min-width: 400px;
-    height: 40px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content:space-between;
     flex-direction: row;
-    margin: 10px;
+    margin: 0px;
     cursor: default;
 }
 
@@ -20,36 +20,38 @@
     min-width: 400px;
     height: 50px;
     display: flex;
-    align-items:normal;
+    align-items:center;
     justify-content:space-between;
     flex-direction: row;
-    margin: 10px;
-
+    margin: 5px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .Buttom{
     background-color: #29435C;
     color: rgb(255, 255, 255);
     border-radius: 10px;
-    height: 30px;
-    width: 100px;
+    height: 40px;
+    width: 150px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 10px;
-    font-size: 24px;
+    font-size: 30px;
     cursor: pointer;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .header1{
     min-width: 400px;
-    height: 50px;
+    height: 75px;
     display: flex;
     align-items: center;
     justify-content:center;
     flex-direction: row;
     margin: 10px;
     cursor: default;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .table{
@@ -292,14 +294,14 @@
 }
 
 .titleGameDiv{
-    background-color: #29435C;
-    width: 200px;
-    height: 50px;
+    background-color: #152A38;
+    width: 250px;
+    height: 65px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin: 10px;
+    margin: 15px;
     border-radius: 20px;
 }
 
@@ -311,7 +313,7 @@
 .TitleText{
     color: white;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 35px;
+    font-size: 45px;
 }
 
 .buttomR {

@@ -3,6 +3,11 @@
 // forma interna para representar el tablero
 // 0 = vacio, otro numero es el numero dentro de dicha celda
 
+let movesCounter = 0;	// contador de movimientos
+let piecesCounter = 1;	// contador de piezas
+let inicioTiempo; // Variable para almacenar el momento de inicio del juego
+let intervaloCronometro; // Variable para almacenar el intervalo del cronómetro
+
 const pieza = {
     num: 2,
     positionx: 0,
@@ -10,17 +15,15 @@ const pieza = {
 
 }
 
-let movimientos = 0;
-
 var gameBoard = [ [0,0,0,0],
                   [0,0,0,0],
                   [0,0,0,0],
                   [0,0,0,0],
                   [0,0,0,0]];
 
-
 // Intento de función para mover el bloque (solo caida)
 function dropBlock() {
+    countPieces();
     const fallingBlock = document.getElementById('fallingBlock');
     fallingBlock.innerText = generateRandomNumber();
 };
@@ -28,15 +31,43 @@ function dropBlock() {
 // Función para iniciar el juego
 function startGame() {
     setInterval(dropBlock, 1000); // Llamada a la función dropBlock cada segundo
+    
+};
+
+function actualizarCronometro() {
+    const tiempoActual = new Date();
+    const tiempoTranscurrido = tiempoActual - inicioTiempo;
+
+    // Calcula minutos y segundos
+    const minutos = Math.floor(tiempoTranscurrido / (1000 * 60));
+    const segundos = Math.floor((tiempoTranscurrido % (1000 * 60)) / 1000);
+
+    // Actualiza el contenido del elemento HTML con el cronómetro
+    document.getElementById('scoreTime').textContent = `${minutos}m ${segundos}s`;
+}
+
+// Función para incrementar el contador de movimientos
+function incrementarMovimientos() {
+    movesCounter++;
+    document.getElementById('scoreMoves').textContent = movesCounter;
+};
+
+// Función que recorre la matriz y cuenta la cantidad de piezas en el tablero
+function countPieces() {
+    let counter = 1;
+    for (let row = 0; row < gameBoard.length; row++) {
+        for (let col = 0; col < gameBoard[row].length; col++) {
+            if (gameBoard[row][col] !== 0) {
+                piecesCounter = counter++;
+            }
+        }
+    }
+    document.getElementById('scorePieces').textContent = piecesCounter;
 };
 
 // Función funciones de botones de play y pause
 function ClickActive(action){
-    if (action == 'play'){
-        game();
-    } else if (action == 'pause'){
-        console.log("Juego Pausado");
-    }
+    game();
 };
 
 //Funcion para generar un numero aleatorio con probabilidad truncada
@@ -57,10 +88,10 @@ function generateRandomNumber() {
 };
 
 // funcion para los eventos del teclado
-
 function eventosTeclado(){
     document.addEventListener('keypress', (evt) => {
         if(evt.key === 'd'){
+            incrementarMovimientos();
             if(pieza.positiony + 1 < gameBoard[0].length){ // verificar que no se salga
                 if(gameBoard[pieza.positionx][pieza.positiony + 1] == pieza.num || 
                     gameBoard[pieza.positionx][pieza.positiony + 1] == 0) // verifica que sea el mismo numero o que este vacia
@@ -73,10 +104,9 @@ function eventosTeclado(){
                     }
             }
             updateGUI();
-            movimientos++;
-
         }
         if(evt.key === 'a'){
+            incrementarMovimientos();
             if(pieza.positiony - 1 >= 0){ // verificar que no se salga
                 if(gameBoard[pieza.positionx][pieza.positiony - 1] == pieza.num || 
                     gameBoard[pieza.positionx][pieza.positiony - 1] == 0) // verifica que sea el mismo numero o que este vacia
@@ -91,9 +121,9 @@ function eventosTeclado(){
 
             }
             updateGUI();
-            movimientos++;
         }
         if(evt.key === 's'){
+            incrementarMovimientos();
             if(pieza.positionx + 1 < gameBoard.length){ // verificar que no se salga
                 if(gameBoard[pieza.positionx + 1][pieza.positiony] == pieza.num || 
                     gameBoard[pieza.positionx + 1][pieza.positiony] == 0) // verifica que sea el mismo numero o que este vacia
@@ -108,14 +138,30 @@ function eventosTeclado(){
 
             }
             updateGUI();
-            movimientos++;
         }
 });
 }
 
-
 // Función para mostrar la ventana modal
 function openModalGanador() {
+    const finTiempo = new Date(); // Guarda el momento de finalización del juego
+
+    // Calcula la diferencia de tiempo en milisegundos
+    const tiempoTranscurrido = finTiempo - inicioTiempo;
+
+    // Calcula minutos y segundos
+    const minutos = Math.floor(tiempoTranscurrido / (1000 * 60));
+    const segundos = Math.floor((tiempoTranscurrido % (1000 * 60)) / 1000);
+
+    const tiepoDeJuego = document.getElementById('F-Tiempo');
+    tiepoDeJuego.textContent = `Tiempo: ${minutos}m ${segundos}s`;
+
+    const movimientosDeJuego = document.getElementById('F-Movimientos');
+    movimientosDeJuego.textContent = `Movimientos: ${movesCounter}`;
+
+    const piezasDeJuego = document.getElementById('F-Piezas');
+    piezasDeJuego.textContent = `Piezas: ${piecesCounter}`;
+
     const modal = document.getElementById('modal');
     modal.style.display = 'block';
 }
@@ -127,27 +173,48 @@ function closeModalGanador() {
 }
 
 function openModalPerdedor() {
-    const modal = document.getElementById('modal2');
-    modal.style.display = 'block';
+    const finTiempo = new Date(); // Guarda el momento de finalización del juego
+
+    // Calcula la diferencia de tiempo en milisegundos
+    const tiempoTranscurrido = finTiempo - inicioTiempo;
+
+    // Calcula minutos y segundos
+    const minutos = Math.floor(tiempoTranscurrido / (1000 * 60));
+    const segundos = Math.floor((tiempoTranscurrido % (1000 * 60)) / 1000);
+
+    const tiepoDeJuego = document.getElementById('F-Tiempo');
+    tiepoDeJuego.textContent = `Tiempo: ${minutos}m ${segundos}s`;
+
+    const movimientosDeJuego = document.getElementById('F-Movimientos');
+    movimientosDeJuego.textContent = `Movimientos: ${movesCounter}`;
+
+    const piezasDeJuego = document.getElementById('F-Piezas');
+    piezasDeJuego.textContent = `Piezas: ${piecesCounter}`;
+
+    const modal2 = document.getElementById('modal2');
+    modal2.style.display = 'block';
 }
 
 // Función para cerrar la ventana modal
 function closeModalPerdedor() {
-    const modal = document.getElementById('modal2');
-    modal.style.display = 'none';
+    const modal2 = document.getElementById('modal2');
+    modal2.style.display = 'none';
 }
 
 
 // game loop
-
 function game(){
     eventosTeclado(); // lo primero es asignarle un eventListener al teclado
-    // dibujar();
-    //crearPieza(2, 2,2);
+    
     console.log(gameBoard);
+    inicioTiempo = new Date(); // Guarda el momento de inicio del juego
+    
+    intervaloCronometro = setInterval(actualizarCronometro, 1000);
+
+    document.getElementById('scorePieces').textContent = piecesCounter;
 
     const intervalo = setInterval(() => {
-        //dibujar();
+        
         console.log(gameBoard);
         caerAutomaticamente(intervalo);
         verificarGanador(intervalo);
@@ -156,7 +223,7 @@ function game(){
 
 }
 
-function buttomRestart(){
+function buttomRestart1(){
     closeModalGanador();
     gameBoard = [ [0,0,0,0],
                   [0,0,0,0],
@@ -164,6 +231,28 @@ function buttomRestart(){
                   [0,0,0,0],
                   [0,0,0,0]];
     updateGUI();
+    clearInterval(intervaloCronometro); // Detén el cronómetro
+    document.getElementById('scoreTime').textContent = '0m 0s'; // Reinicia el cronómetro
+    movesCounter = 0;
+    document.getElementById('scoreMoves').textContent = movesCounter;
+    piecesCounter = 0;
+    document.getElementById('scorePieces').textContent = piecesCounter;
+}
+
+function buttomRestart2(){
+    closeModalPerdedor();
+    gameBoard = [ [0,0,0,0],
+                  [0,0,0,0],
+                  [0,0,0,0],
+                  [0,0,0,0],
+                  [0,0,0,0]];
+    updateGUI();
+    clearInterval(intervaloCronometro); // Detén el cronómetro
+    document.getElementById('scoreTime').textContent = '0m 0s'; // Reinicia el cronómetro
+    movesCounter = 0;
+    document.getElementById('scoreMoves').textContent = movesCounter;
+    piecesCounter = 0;
+    document.getElementById('scorePieces').textContent = piecesCounter;
 }
 
 
@@ -188,6 +277,7 @@ function caerAutomaticamente(intervalo){
         if(pieza.positionx == 0){
             console.log("Haz perdido");
             clearInterval(intervalo);
+            openModalPerdedor();
         }
         // sino crea otra pieza
         else{ 
@@ -195,10 +285,8 @@ function caerAutomaticamente(intervalo){
         }
     }
     updateGUI();
-
-    
-
 }
+
 // Esta funcion esta para saber cuando la pieza no se puede mover mas hacia abajo
 function terminarPieza(){
 
@@ -206,6 +294,7 @@ function terminarPieza(){
 
 // esta funcion crea una nueva pieza
 function crearNewPieza(){
+    countPieces();
     generateRandomNumber();
     pieza.positionx = 0;
     pieza.positiony = Math.floor(Math.random() * 4);;
@@ -229,6 +318,7 @@ function pausarIntervalo(id){
 }
 
 function updateGUI(){
+    countPieces();
     for (let row = 0; row < gameBoard.length; row++) {
         for (let col = 0; col < gameBoard[row].length; col++) {
             const cellId = `celda_${row}_${col}`;
