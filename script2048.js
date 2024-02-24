@@ -5,21 +5,19 @@
 
 const pieza = {
     num: 2,
-    positionx: 1,
-    positiony: 1
+    positionx: 0,
+    positiony: Math.floor(Math.random() * 4)
 
 }
 
-
+let movimientos = 0;
 
 var gameBoard = [ [0,0,0,0],
-                  [0,2,0,0],
+                  [0,0,0,0],
                   [0,0,0,0],
                   [0,0,0,0],
                   [0,0,0,0]];
 
-var elet = document.getElementById("arreglo");
-elet.textContent = gameBoard;
 
 // Intento de función para mover el bloque (solo caida)
 function dropBlock() {
@@ -74,6 +72,9 @@ function eventosTeclado(){
                         console.log(gameBoard);
                     }
             }
+            updateGUI();
+            movimientos++;
+
         }
         if(evt.key === 'a'){
             if(pieza.positiony - 1 >= 0){ // verificar que no se salga
@@ -89,41 +90,31 @@ function eventosTeclado(){
                     }
 
             }
+            updateGUI();
+            movimientos++;
         }
-    });
-};
+        if(evt.key === 's'){
+            if(pieza.positionx + 1 < gameBoard.length){ // verificar que no se salga
+                if(gameBoard[pieza.positionx + 1][pieza.positiony] == pieza.num || 
+                    gameBoard[pieza.positionx + 1][pieza.positiony] == 0) // verifica que sea el mismo numero o que este vacia
+                    {
+                        gameBoard[pieza.positionx + 1][pieza.positiony] += pieza.num;
+                        gameBoard[pieza.positionx][pieza.positiony] = 0;
+                        pieza.positionx++;
+                        pieza.num = gameBoard[pieza.positionx][pieza.positiony];
 
-// Esta funcion verifica las colisiones de la pieza con un numero
-function verificarColisiones(){
+                        console.log(gameBoard);
+                    }
 
-
+            }
+            updateGUI();
+            movimientos++;
+        }
+});
 }
 
-function calcularIndice(i,j){
-    let indice = (i*gameBoard[0].length) + j;
-    return indice;
 
-}
 
-// Esta funcion crea la pieza
-function crearPieza(valor, fila, col){
-    // const nums = [2,4,8];
-    // let num = Math.floor(Math.random() * 3); // esta funcion asigna un numero aleatorio entero entre 0 y 2 inclusivo
-    let elemento = document.createElement("div");
-    
-    elemento.classList.add("cellInterior"); //clase nueva y dentro
-    //elemento.textContent = nums[num];
-    elemento.textContent = valor;
-    // let ubicacion = document.querySelector(".cell");
-    let ubicacion2 = document.querySelectorAll(".cell");
-
-    const indice = calcularIndice(fila, col);
-    ubicacion2[indice].appendChild(elemento);
-
-    // ubicacion.appendChild(elemento)
-}
-
-//esta funcion calcula el indice para colocarlo dentro de la celda, es que es un flexbox
 
 
 // game loop
@@ -158,6 +149,7 @@ function caerAutomaticamente(intervalo){
         gameBoard[pieza.positionx + 1][pieza.positiony] = pieza.num;
         gameBoard[pieza.positionx][pieza.positiony] = 0;
         pieza.positionx++;
+        
     }
     // si abajo no es 0 y la pieza no es la misma suceden dos cosas
     else if(gameBoard[pieza.positionx + 1][pieza.positiony] != 0 && gameBoard[pieza.positionx + 1][pieza.positiony] != pieza.num){
@@ -171,6 +163,7 @@ function caerAutomaticamente(intervalo){
             crearNewPieza();
         }
     }
+    updateGUI();
 
     
 
@@ -191,18 +184,72 @@ function crearNewPieza(){
 function verificarGanador(intervalo){
     for(let i = 0; i < gameBoard.length; i++){
         for(let j = 0; j < gameBoard[0].length; j++){
-            if(gameBoard[i][j] >= 128){ // Si llego al 2048
+            if(gameBoard[i][j] >= 2048){ // Si llego al 2048
                 console.log("Haz ganado");
                 clearInterval(intervalo);
                 break;
             }
         }
     }
-
 }
 
 function pausarIntervalo(id){
 
+}
+
+function updateGUI(){
+    for (let row = 0; row < gameBoard.length; row++) {
+        for (let col = 0; col < gameBoard[row].length; col++) {
+            const cellId = `celda_${row}_${col}`;
+            const cellElement = document.getElementById(cellId);
+
+            // Actualiza la clase de la celda segÃºn el valor en la matriz de juego
+            if (gameBoard[row][col] === 0) {
+                if (row === 0){
+                    cellElement.className = 'firstCell';
+                    cellElement.textContent = '';
+                } else {
+                    cellElement.className = 'cell';
+                    cellElement.textContent = '';
+                }
+            } else if (gameBoard[row][col] === 2) {
+                cellElement.className = 'cell2';
+                cellElement.textContent = '2';
+            } else if (gameBoard[row][col] === 4) {
+                cellElement.className = 'cell4';
+                cellElement.textContent = '4';
+            } else if (gameBoard[row][col] === 8) {
+                cellElement.className = 'cell8';
+                cellElement.textContent = '8';
+            } else if (gameBoard[row][col] === 16) {
+                cellElement.className = 'cell16';
+                cellElement.textContent = '16';
+            } else if (gameBoard[row][col] === 32) {
+                cellElement.className = 'cell32';
+                cellElement.textContent = '32';
+            } else if (gameBoard[row][col] === 64) {
+                cellElement.className = 'cell64';
+                cellElement.textContent = '64';
+            } else if (gameBoard[row][col] === 128) {
+                cellElement.className = 'cell128';
+                cellElement.textContent = '128';
+            } else if (gameBoard[row][col] === 256) {
+                cellElement.className = 'cell256';
+                cellElement.textContent = '256';
+            } else if (gameBoard[row][col] === 512) {
+                cellElement.className = 'cell512';
+                cellElement.textContent = '512';
+            } else if (gameBoard[row][col] === 1024) {
+                cellElement.className = 'cell1024';
+                cellElement.textContent = '1024';
+            } else if (gameBoard[row][col] === 2048) {
+                cellElement.className = 'cell2048';
+                cellElement.textContent = '2048';
+            } else{
+                console.log("Error al actualizar la interfaz");
+            }
+        }
+    }
 }
 
 game();

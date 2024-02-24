@@ -79,27 +79,202 @@
 }
 
 
-.cell0{
+.firstCell{
     background-color: #152A38;
     font-size: 20px;
-    border-color: #3282B8;
     margin: 3px;
-    height: 75px;
-    width: 75px;
-    border-width: 1px;
-    border-radius: 5px;
-}
-
-.cell{
-    background-color: #29435C;
-    margin: 3px;
-    border-color: #3282B8;
     height: 75px;
     width: 75px;
     border-width: 1px;
     border-radius: 5px;
     font-size: 40px;
     text-align: center;
+    font: 1em sans-serif;
+}
+
+.cell{
+    background-color: #29435C;
+    margin: 3px;
+    height: 75px;
+    width: 75px;
+    border-width: 1px;
+    border-radius: 5px;
+    font-size: 40px;
+    text-align: center;
+    font: 1em sans-serif;
+}
+
+.cell2{
+    background-color: #EEF5FF;
+    margin: 3px;
+    height: 75px;
+    width: 75px;
+    border-width: 1px;
+    border-radius: 5px;
+    font-size: 40px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center; /* Esto asegura la alineación horizontal centrada también */
+    color: black;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.cell4{
+    background-color: #B4D4FF;
+    margin: 3px;
+    height: 75px;
+    width: 75px;
+    border-width: 1px;
+    border-radius: 5px;
+    font-size: 40px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center; /* Esto asegura la alineación horizontal centrada también */
+    color: black;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;}
+
+.cell8{
+    background-color: #86B6F6;
+    margin: 3px;
+    height: 75px;
+    width: 75px;
+    border-width: 1px;
+    border-radius: 5px;
+    font-size: 40px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center; /* Esto asegura la alineación horizontal centrada también */
+    color: black;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;}
+
+.cell16{
+    background-color: #176B87;
+    margin: 3px;
+    height: 75px;
+    width: 75px;
+    border-width: 1px;
+    border-radius: 5px;
+    font-size: 40px;
+display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center; /* Esto asegura la alineación horizontal centrada también */
+    color: black;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;}
+
+.cell32{
+    background-color: #365486;
+    margin: 3px;
+    height: 75px;
+    width: 75px;
+    border-width: 1px;
+    border-radius: 5px;
+    font-size: 40px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center; /* Esto asegura la alineación horizontal centrada también */
+    color: black;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.cell64{
+    background-color: #0F1035;
+    margin: 3px;
+    height: 75px;
+    width: 75px;
+    border-width: 1px;
+    border-radius: 5px;
+    font-size: 40px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center; /* Esto asegura la alineación horizontal centrada también */
+    color: white;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.cell128{
+    background-color: #6B240C;
+    margin: 3px;
+    height: 75px;
+    width: 75px;
+    border-width: 1px;
+    border-radius: 5px;
+    font-size: 40px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center; /* Esto asegura la alineación horizontal centrada también */
+    color: white;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.cell256{
+    background-color: #994D1C;
+    margin: 3px;
+    height: 75px;
+    width: 75px;
+    border-width: 1px;
+    border-radius: 5px;
+    font-size: 40px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center; /* Esto asegura la alineación horizontal centrada también */
+    color: black;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.cell512{
+    background-color: #E48F45;
+    margin: 3px;
+    height: 75px;
+    width: 75px;
+    border-width: 1px;
+    border-radius: 5px;
+    font-size: 40px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center; /* Esto asegura la alineación horizontal centrada también */
+    color: black;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.cell1024{
+    background-color: #F5CCA0;
+    margin: 3px;
+    height: 75px;
+    width: 75px;
+    border-width: 1px;
+    border-radius: 5px;
+    font-size: 40px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center; /* Esto asegura la alineación horizontal centrada también */
+    color: black;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.cell2048{
+    background-color: #974EC3;
+    margin: 3px;
+    height: 75px;
+    width: 75px;
+    border-width: 1px;
+    border-radius: 5px;
+    font-size: 40px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center; /* Esto asegura la alineación horizontal centrada también */
+    color: black;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .divX{
@@ -138,4 +313,3 @@
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 35px;
 }
-
