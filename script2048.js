@@ -33,7 +33,7 @@ function startGame() {
 // Función funciones de botones de play y pause
 function ClickActive(action){
     if (action == 'play'){
-        generateRandomNumber();
+        game();
     } else if (action == 'pause'){
         console.log("Juego Pausado");
     }
@@ -114,7 +114,28 @@ function eventosTeclado(){
 }
 
 
+// Función para mostrar la ventana modal
+function openModalGanador() {
+    const modal = document.getElementById('modal');
+    modal.style.display = 'block';
+}
 
+// Función para cerrar la ventana modal
+function closeModalGanador() {
+    const modal = document.getElementById('modal');
+    modal.style.display = 'none';
+}
+
+function openModalPerdedor() {
+    const modal = document.getElementById('modal2');
+    modal.style.display = 'block';
+}
+
+// Función para cerrar la ventana modal
+function closeModalPerdedor() {
+    const modal = document.getElementById('modal2');
+    modal.style.display = 'none';
+}
 
 
 // game loop
@@ -133,6 +154,16 @@ function game(){
 
     }, 1000);
 
+}
+
+function buttomRestart(){
+    closeModalGanador();
+    gameBoard = [ [0,0,0,0],
+                  [0,0,0,0],
+                  [0,0,0,0],
+                  [0,0,0,0],
+                  [0,0,0,0]];
+    updateGUI();
 }
 
 
@@ -184,8 +215,8 @@ function crearNewPieza(){
 function verificarGanador(intervalo){
     for(let i = 0; i < gameBoard.length; i++){
         for(let j = 0; j < gameBoard[0].length; j++){
-            if(gameBoard[i][j] >= 2048){ // Si llego al 2048
-                console.log("Haz ganado");
+            if(gameBoard[i][j] >= 16){ // Si llego al 2048
+                openModalGanador();
                 clearInterval(intervalo);
                 break;
             }
@@ -252,4 +283,4 @@ function updateGUI(){
     }
 }
 
-game();
+

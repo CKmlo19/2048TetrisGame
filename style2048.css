@@ -158,7 +158,7 @@
     border-width: 1px;
     border-radius: 5px;
     font-size: 40px;
-display: flex;
+    display: flex;
     text-align: center;
     align-items: center;
     justify-content: center; /* Esto asegura la alineación horizontal centrada también */
@@ -312,4 +312,53 @@ display: flex;
     color: white;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 35px;
+}
+
+.buttomR {
+    margin-top: 20px; /* Espacio superior opcional */
+    background-color: #29435C;
+    color: rgb(255, 255, 255);
+    border-radius: 10px;
+    height: 50px;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    display:list-item;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Centra tanto vertical como horizontalmente */
+    margin: 15% auto;
+    font-size: 45px;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    height: 60%;
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: black;
 }
