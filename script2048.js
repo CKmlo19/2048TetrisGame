@@ -13,7 +13,7 @@ const pieza = {
 
 
 var gameBoard = [ [0,0,0,0],
-                  [0,2,0,2],
+                  [0,2,0,4],
                   [0,0,0,0],
                   [0,0,0,0],
                   [0,0,0,0]];
@@ -133,10 +133,14 @@ function game(){
     eventosTeclado(); // lo primero es asignarle un eventListener al teclado
     // dibujar();
     //crearPieza(2, 2,2);
+    console.log(gameBoard);
+
     setInterval(() => {
         //dibujar();
-      //  console.log(gameBoard);
-    }, 1000);
+        caerAutomaticamente();
+        console.log(gameBoard);
+
+    }, 5000);
 
 }
 
@@ -150,6 +154,39 @@ function dibujar(){
     }
 }
 
+// Esta funcion hace que la pieza caiga automaticamente de manera vertical
+function caerAutomaticamente(){
+    if(pieza.positionx + 1 >= gameBoard.length){
+        pieza.num = 4
+        pieza.positionx = 0;
+        pieza.positiony = Math.floor(Math.random * 3);
+        gameBoard[pieza.positionx][pieza.positiony] = pieza.num;
+
+    }
+    else if(gameBoard[pieza.positionx + 1][pieza.positiony] != 0 || 
+        gameBoard[pieza.positionx + 1][pieza.positiony] != pieza.num){
+        gameBoard[pieza.positionx + 1][pieza.positiony] = pieza.num;
+        gameBoard[pieza.positionx][pieza.positiony] = 0;
+        pieza.positionx++;
+    }
+
+}
+// Esta funcion esta para saber cuando la pieza no se puede mover mas hacia abajo
+function terminarPieza(){
+
+}
+
+function verificarGanador(){
+    for(let i = 0; i < gameBoard.length; i++){
+        for(let j = 0; j < gameBoard[0].length; j++){
+            if(gameBoard[i][j] >= 2048){ // Si llego al 2048
+                return true;
+            }
+        }
+    }
+    return false;
+
+}
 
 function pausarIntervalo(id){
 
