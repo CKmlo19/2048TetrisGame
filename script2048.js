@@ -86,6 +86,8 @@ function generateRandomNumber() {
     }
 };
 
+
+
 // funcion para los eventos del teclado
 function eventosTeclado(){
     document.addEventListener('keypress', (evt) => {
@@ -286,10 +288,6 @@ function caerAutomaticamente(intervalo){
     //verificarBajar()
 };
 
-// Esta funcion esta para saber cuando la pieza no se puede mover mas hacia abajo
-function terminarPieza(){
-
-};
 
 // esta funcion crea una nueva pieza
 function crearNewPieza(){
@@ -303,7 +301,7 @@ function crearNewPieza(){
 function verificarGanador(intervalo){
     for(let i = 0; i < gameBoard.length; i++){
         for(let j = 0; j < gameBoard[0].length; j++){
-            if(gameBoard[i][j] >= 16){ // Si llego al 2048
+            if(gameBoard[i][j] >= 2048){ // Si llego al 2048
                 openModalGanador();
                 clearInterval(intervalo);
                 break;
