@@ -65,7 +65,7 @@ function countPieces() {
 };
 
 // Función funciones de botones de play y pause
-function ClickActive(action){
+function ClickActive(){
     game();
 };
 
@@ -183,13 +183,13 @@ function openModalPerdedor() {
     const minutos = Math.floor(tiempoTranscurrido / (1000 * 60));
     const segundos = Math.floor((tiempoTranscurrido % (1000 * 60)) / 1000);
 
-    const tiepoDeJuego = document.getElementById('F-Tiempo');
+    const tiepoDeJuego = document.getElementById('F-Time');
     tiepoDeJuego.textContent = `Tiempo: ${minutos}m ${segundos}s`;
 
-    const movimientosDeJuego = document.getElementById('F-Movimientos');
+    const movimientosDeJuego = document.getElementById('F-Moves');
     movimientosDeJuego.textContent = `Movimientos: ${movesCounter}`;
 
-    const piezasDeJuego = document.getElementById('F-Piezas');
+    const piezasDeJuego = document.getElementById('F-Pieces');
     piezasDeJuego.textContent = `Piezas: ${piecesCounter}`;
 
     const modal2 = document.getElementById('modal2');
